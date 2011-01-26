@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009-2010 the original author or authors.
+    See the notice.md file distributed with this work for additional
+    information regarding copyright ownership.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.fusesource</groupId>
+    <artifactId>fusesource-pom</artifactId>
+    <version>1.0</version>
+  </parent>
+
+  <groupId>org.fusesource.restygwt</groupId>
+  <artifactId>restygwt-project</artifactId>
+  <version>1.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <name>${project.artifactId}</name>
+  <description>RestyGWT is a GWT generator for REST services and JSON encoded data transfer objects</description>
+
+  <properties>
+    <forge-project-id>restygwt</forge-project-id>
+    <forge-project-id-uc>RESTYGWT</forge-project-id-uc>
+
+    <release-altGitURL>scm:git:ssh://git@github.com:chirino/resty-gwt.git</release-altGitURL>
+    <gwt-version>2.1.1</gwt-version>
+  </properties>
+
+  <url>http://${forge-project-id}.fusesource.org</url>
+  <inceptionYear>2010</inceptionYear>
+
+  <issueManagement>
+    <system>jira</system>
+    <url>http://github.com/chirino/resty-gwt/issues</url>
+  </issueManagement>
+  
+  <mailingLists>
+    <mailingList>
+      <name>RestyGWT Development List</name>
+      <archive>http://groups.google.com/group/restygwt</archive>
+      <post>restygwt@googlegroups.com</post>
+      <subscribe>restygwt+subscribe@googlegroups.com</subscribe>
+      <unsubscribe>restygwt+unsubscribe@googlegroups.com</unsubscribe>
+    </mailingList>
+  </mailingLists>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
+  <scm>
+    <connection>scm:git:git://github.com/larsenje/resty-gwt.git</connection>
+    <developerConnection>${release-altGitURL}</developerConnection>
+    <url>http://github.com/larsenje/resty-gwt</url>
+  </scm>
+  <distributionManagement>
+  	<snapshotRepository>
+  		<id>github</id>
+  		<url>https://github.com/larsenje/${forge-project-id}/raw/snapshot/maven/snapshots</url>
+  	</snapshotRepository>
+    <site>
+      <id>website.fusesource.org</id>
+      <name>website</name>
+      <url>dav:http://fusesource.com/forge/dav/${forge-project-id}/maven/${project.version}</url>
+    </site>
+  </distributionManagement>
+  
+  <developers>
+    <developer>
+      <id>chirino</id>
+      <name>Hiram Chirino</name>
+      <email>hiram@hiramchirino.com</email>
+      <url>http://hiramchirino.com</url>
+      <timezone>GMT-5</timezone>
+    </developer>
+  </developers>
+
+  <build>
+    <defaultGoal>install</defaultGoal>
+
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <version>2.1.0-1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>resources</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <!-- <gwtHome>${env.GWT_HOME}</gwtHome> -->
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.4.3</version>
+        <configuration>
+          <failIfNoTests>false</failIfNoTests>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+  
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jxr-maven-plugin</artifactId>
+        <version>2.0-beta-1</version>
+        <configuration>
+          <aggregate>true</aggregate>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <excludePackageNames>*.internal</excludePackageNames>
+          <linksource>true</linksource>
+          <links>
+            <link>http://java.sun.com/j2se/1.5.0/docs/api</link>
+          </links>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.1.0</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>index</report>
+              <report>sumary</report>
+              <report>plugins</report>
+              <report>dependencies</report>
+              <report>mailing-list</report>
+              <report>issue-tracking</report>
+              <report>license</report>
+              <report>scm</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>surefire-report-maven-plugin</artifactId>
+        <version>2.0-beta-1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-plugin-plugin</artifactId>
+        <version>2.5</version>
+      </plugin>
+    </plugins>
+  </reporting>
+  
+
+  <profiles>
+    <!-- 
+        Do a license check by running       : mvn -P license license:check  
+        UPdate the license check by running : mvn -P license license:format  
+      -->
+    <profile>
+      <id>license</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.mycila.maven-license-plugin</groupId>
+            <artifactId>maven-license-plugin</artifactId>
+            <version>1.6.0</version>
+            <configuration>
+              <quiet>false</quiet>
+              <header>src/main/resources/license-header.txt</header>
+              <aggregate>true</aggregate>
+              <includes>
+                  <include>src/**</include>
+                  <include>**/pom.xml</include>
+              </includes>
+              <excludes>
+                <!-- ignore files produced during a build -->
+                <exclude>**/target/**</exclude>
+                <exclude>**/WEB-INF/classes/**</exclude>
+
+                <exclude>**/*.response-headers</exclude>
+                <exclude>**/*.response</exclude>
+            
+                <!-- ignore binary files -->
+                <exclude>**/*.jpg</exclude>
+                <exclude>**/*.png</exclude>
+                <exclude>**/*.gif</exclude>
+                <exclude>**/*.ico</exclude>
+                <exclude>**/*.ipr</exclude>
+                <exclude>**/*.iml</exclude>
+                <exclude>**/*.iws</exclude>
+              </excludes>
+              <useDefaultExcludes>false</useDefaultExcludes>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>        
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    
+
+  </profiles>
+
+  <modules>
+    <module>restygwt</module>
+    <!--
+    <module>restygwt-website</module>
+      -->
+  </modules>
+
+</project>
