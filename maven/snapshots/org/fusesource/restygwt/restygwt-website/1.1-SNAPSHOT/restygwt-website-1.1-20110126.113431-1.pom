@@ -107,10 +107,9 @@
         
         <configuration>
           <warSourceDirectory>${basedir}/src</warSourceDirectory>
-          <!-- 
           <remoteServerId>website.fusesource.org</remoteServerId>
           <remoteServerUrl>dav:http://fusesource.com/forge/dav/${forge-project-id}/versions/${project.version}/website</remoteServerUrl>
-          <remoteServerUrl>dav:https://fusesource.com/forge/dav/${forge-project-id}</remoteServerUrl> -->
+          <!-- <remoteServerUrl>dav:https://fusesource.com/forge/dav/${forge-project-id}</remoteServerUrl> -->
         </configuration>
         
         <executions>
